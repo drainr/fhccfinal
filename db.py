@@ -5,7 +5,11 @@ import os
 @st.cache_resource
 def init_connection():
     """Initialize MongoDB connection"""
-    client = MongoClient(st.secrets["mongo_uri"])
+    client = MongoClient(
+    st.secrets["mongo_uri"],
+    tls=True,
+    tlsAllowInvalidCertificates=True
+)
     return client
 
 client = init_connection()
