@@ -5,12 +5,7 @@ import os
 @st.cache_resource
 def init_connection():
     """Initialize MongoDB connection"""
-    try:
-        MONGO_URI = st.secrets["mongo"]["uri"]
-    except (KeyError, FileNotFoundError):
-        MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
-    
-    client = MongoClient(MONGO_URI)
+    client = MongoClient(st.secrets["mongo_uri"])
     return client
 
 client = init_connection()
